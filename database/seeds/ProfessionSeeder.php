@@ -13,17 +13,16 @@ class ProfessionSeeder extends Seeder
      */
     public function run()
     {   
-        //Ingresar datos con una consulta sql
+        //Load data with a sql query
         // DB::insert('INSERT INTO professions(title) VALUES (:title)', [
         //     'title' => 'Desarrollador back-end'
         // ]);
 
-        //Ingresar datos con el generador de laravel
+        //Load data with the laravel generator
         // DB::table('professions')->insert([
         //     'title' => 'Desarrollador back-end',
         // ]);
 
-        //Ingresar datos con un modelo
         //load data in the professions table with a model
         Profession::create([
             'title' => 'Desarrollador back-end',
@@ -36,13 +35,8 @@ class ProfessionSeeder extends Seeder
         Profession::create([
             'title' => 'Diseñador web',
         ]);
-
-        // DB::table('professions')->insert([
-        //     'title' => 'Desarrollador front-end',
-        // ]);
-
-        // DB::table('professions')->insert([
-        //     'title' => 'Diseñador web',
-        // ]);
+        
+        //Load random data with the factorie model
+        factory(Profession::class, 17)->create();
     }
 }
