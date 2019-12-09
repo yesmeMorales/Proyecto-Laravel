@@ -14,19 +14,22 @@ Route::get('/', function(){
     return 'Home';
 });
 //Le indicamos a laravel que apunte al controlador o clase y @metodo
-Route::get('/usuarios', 'UserController@index');
+//We tell laravel point to the controller or class and @metodo
+Route::get('/usuarios', 'UserController@index')
+    ->name('users.index');
 
 //Usamos un parametro dinamico para mostrar algo de acuerdo al id del usuario
-Route::get('/usuarios/{id}', 'UserController@show')
-    ->where('id', '[0-9]+');
+//We use a dynamic parameter to show something according to the user's id
+Route::get('/usuarios/{user}', 'UserController@show')
+    ->where('user', '[0-9]+')
+    ->name('users.show');
 
-Route::get('/usuarios/nuevo', 'UserController@create');
+Route::get('/usuarios/nuevo', 'UserController@create')
+    ->name('users.create');
 
-Route::get('/usuarios/editar/{id}', 'UserController@edit');
+Route::get('/usuarios/editar/{id}', 'UserController@edit')
+    ->name('users.edit');
 
-//vamos a colocar una funcion anonima con dos parametros
-//para que un parametro sea opcional podemos usar ? y hacer la variable = null
-// y usamos un if para saber que mensaje imprimir
 Route::get('/saludo/{name}', 'WelcomeUserController@welcome');
 
 Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@welcomeNickname');

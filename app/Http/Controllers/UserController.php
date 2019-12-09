@@ -2,34 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
 
     public function index(){
-        if (request()->has('empty')){
-            $users = [];
-        } else {
-            $users = [
-                'Joel',
-                'Ellie',
-                'Tess',
-                'Tommy',
-                'Bill',
-                '<script>alert("Clicker")</script>'
-            ];
+        //Listado dinamico usando constructor de consultas laravel 
+        //$users = DB::table('users')->get();
+        //dd($users);
 
-        }
-        
+        //Cargar datos con eloquent
+        $users = User::all();
+
         return view('users.index')
         	->with('users', $users)
         	->with('title', 'Listado de usuarios');
     }
-
-    public function show($id){
-        return view('users.show', compact('id'));
+    //call the user directly, this parameter must match that of the route in web.php
+    public function show(User $user){
+        return view('users.show', compact('user'));
     }
+    
 
     public function create(){
         return view('crear');

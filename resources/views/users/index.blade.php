@@ -7,7 +7,10 @@
     <ul>
             
         @forelse ($users as $user)
-            <li>{{ $user }}</li>
+            <li>
+                {{ $user->name }}, {{ $user->email }}
+                <a href="{{ route('users.show', ['user' => $user]) }}">Ver detalles</a>
+            </li>
             
         @empty
             <li>No hay usuarios registrados. :( </li>
@@ -17,9 +20,9 @@
     
 @endsection
 
-@section('sidebar')
+{{-- @section('sidebar')
     
     @parent
     <h2>Barra lateral personalizada</h2>
     
-@endsection
+@endsection --}}
