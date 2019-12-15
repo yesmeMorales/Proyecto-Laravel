@@ -28,11 +28,68 @@ class UserController extends Controller
     
 
     public function create(){
-        return view('crear');
+        return view('users.create');
     }
 
-    public function edit($id){
-        return "Editando usuario: {$id}";
+    public function edit(User $user){
+        return view('users.edit',['user'=> $user]);
+    }
+
+    public function store(){
+
+        //return redirect('usuarios/nuevo')->withInput();
+        //Usamos metodo request para obtener los datos y agregar el usuario
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6'
+        ],[
+            'name.required' => 'El campo nombre es obligatorio',
+            'email.required' => 'El campo email es obligatorio',
+            'password.required' => 'El campo password es obligatorio',
+            'password.min' => 'El password debe tener mas de 6 caracteres'
+        ]);
+        //dd($data);
+
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ]);
+        //Al final podemos redireccionar a la lista de usuarios
+        return redirect()->route('users.index');
+    } 
+
+    public function update(User $user){
+
+        //dd('actualizado!');
+
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'password' => ''
+        ]);
+
+        if($data['password'] != null ){
+            $data['password'] = bcrypt($data['password']);
+        } else {
+            //Restauramos el password anterior
+            unset($data['password']);
+        }
+
+        //$data['password'] = bcrypt($data['password']);
+
+        $user->update($data);
+
+        return redirect()->route('users.show', ['user' => $user]);
+    }
+
+    public function destroy(User $user){
+
+        $user->delete();
+        return redirect()->route('users.index');
+
     }
 
 
