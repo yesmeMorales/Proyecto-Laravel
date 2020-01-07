@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    //constructor
+    public function __construct(){
+        //usamos el middleware auth para dejar pasar a loa usuarios autenticados
+        $this->middleware('auth');
+    }
 
     public function index(){
         //Listado dinamico usando constructor de consultas laravel 

@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
-    return 'Home';
-});
+// Route::get('/', function(){
+//     return 'Home';
+// });
 //Le indicamos a laravel que apunte al controlador o clase y @metodo
 //We tell laravel point to the controller or class and @metodo
 Route::get('/usuarios', 'UserController@index')
@@ -40,3 +40,12 @@ Route::get('/saludo/{name}/{nickname}', 'WelcomeUserController@welcomeNickname')
 
 Route::delete('/usuarios/{user}', 'UserController@destroy')
     ->name('users.destroy');
+
+Route::get('/', 'Auth\LoginController@showLoginForm')
+    ->middleware('guest');
+
+Route::post('login', 'Auth\LoginController@login')
+    ->name('login');
+
+Route::post('logout', 'Auth\LoginController@logout')
+    ->name('logout');

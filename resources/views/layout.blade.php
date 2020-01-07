@@ -97,6 +97,21 @@
             margin-right: 15px;
         }
 
+        .message_welcome{
+            display: inline;
+            position: relative;
+            margin-top: 18px;
+            margin-right: 15px;
+            font-size: 18px;
+            color: #fff;
+            
+        }
+
+        .footer_align{
+            margin-top: 50px;
+            text-align: center;
+        }
+
         </style>
         <!-- Custom styles for this template -->
         <link href="sticky-footer-navbar.css" rel="stylesheet">
@@ -105,10 +120,8 @@
         <header>
             <!-- Fixed navbar -->
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="#">CRUD Usuarios</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <h1 class="navbar-brand">CRUD Usuarios</h1>
+                
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -119,8 +132,19 @@
                         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form> --}}
+                </div> &nbsp;
+
+                <p class="message_welcome">Bienvenido {{ auth()->user()->name }}</p>
+                
+                <div>
+                    
+                    <form action="{{ route('logout') }}" method="POST">
+                        {{ csrf_field() }}
+                        <button class="btn btn-danger btn-xs"> Cerrar sesión</button>
+                    </form>
                 </div>
             </nav>
+            
         </header>
         <!-- Begin page content -->
         <main role="main" class="flex-shrink-0">
@@ -139,7 +163,7 @@
 
         </main>
 
-        <footer class="footer mt-auto py-3">
+        <footer class="footer mt-auto py-3 footer_align" >
             <div class="container">
                 <span class="text-muted">Copyright © 2019 Yesme Morales.</span>
             </div>

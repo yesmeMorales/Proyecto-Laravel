@@ -5,11 +5,12 @@
     <div class="d-flex justify-content-between align-items-end mb-3">
     
         <h1 class="titulo-header">{{ $title }}</h1>
-
         <p>
             <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo usuario</a>
         </p>
+       
     </div>
+
 
     @if ($users->isNotEmpty())
         

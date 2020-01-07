@@ -18,7 +18,8 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            //redireccionarmos a la lista de usuarios al loguearse correctamente
+            return redirect('/usuarios');
         }
 
         return $next($request);
